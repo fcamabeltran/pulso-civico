@@ -8,6 +8,7 @@ class FormulaCandidate(BaseModel):
     foto_url: str
     dni: str
     posicion: int
+    candidate_id: int | None = None
 
 
 class PresidentialFormula(BaseModel):

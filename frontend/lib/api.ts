@@ -15,10 +15,18 @@ const API_URL =
     ? process.env.API_URL
     : process.env.NEXT_PUBLIC_API_URL) ?? "http://localhost:8000/api";
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+async function request<T>(
+  path: string,
+  init?: RequestInit,
+  revalidate: number | false = false,
+): Promise<T> {
+  const isPost = init?.method === "POST";
   const response = await fetch(`${API_URL}${path}`, {
     ...init,
-    cache: "no-store",
+    // Server-side: use ISR revalidation for GETs, no-store for POSTs
+    ...(typeof window === "undefined" && !isPost && revalidate !== false
+      ? { next: { revalidate } }
+      : { cache: "no-store" }),
     headers: {
       "Content-Type": "application/json",
       ...(init?.headers ?? {}),
@@ -33,19 +41,19 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export function getCandidates(): Promise<Candidate[]> {
-  return request<Candidate[]>("/candidates");
+  return request<Candidate[]>("/candidates", undefined, 3600);
 }
 
 export function getCandidate(candidateId: string | number): Promise<CandidateDetail> {
-  return request<CandidateDetail>(`/candidate/${candidateId}`);
+  return request<CandidateDetail>(`/candidate/${candidateId}`, undefined, 3600);
 }
 
 export function compareCandidates(leftId: string | number, rightId: string | number): Promise<CompareResponse> {
-  return request<CompareResponse>(`/compare?c1=${leftId}&c2=${rightId}`);
+  return request<CompareResponse>(`/compare?c1=${leftId}&c2=${rightId}`, undefined, 3600);
 }
 
 export function searchContent(query: string): Promise<SearchResult[]> {
-  return request<SearchResult[]>(`/search?q=${encodeURIComponent(query)}`);
+  return request<SearchResult[]>(`/search?q=${encodeURIComponent(query)}`, undefined, 60);
 }
 
 export function askAssistant(question: string): Promise<ChatResponse> {
@@ -60,7 +68,7 @@ export function getShareImageUrl(leftId: string | number, rightId: string | numb
 }
 
 export function getFormulas(): Promise<PresidentialFormula[]> {
-  return request<PresidentialFormula[]>("/formulas");
+  return request<PresidentialFormula[]>("/formulas", undefined, 300);
 }
 
 export function simplifyText(text: string): Promise<SimplifyResponse> {
@@ -71,14 +79,13 @@ export function simplifyText(text: string): Promise<SimplifyResponse> {
 }
 
 export function getFormulaProfiles(): Promise<FormulaProfile[]> {
-  return request<FormulaProfile[]>("/formula-profiles");
+  return request<FormulaProfile[]>("/formula-profiles", undefined, 3600);
 }
 
 export function getFormulaMemberDetail(id: number): Promise<FormulaMemberDetail> {
-  return request<FormulaMemberDetail>(`/formula-members/${id}`);
+  return request<FormulaMemberDetail>(`/formula-members/${id}`, undefined, 3600);
 }
 
 export function getFormulaMemberByName(name: string): Promise<FormulaMemberDetail | null> {
-  return request<FormulaMemberDetail>(`/formula-members/by-name/${encodeURIComponent(name)}`).catch(() => null);
+  return request<FormulaMemberDetail>(`/formula-members/by-name/${encodeURIComponent(name)}`, undefined, 3600).catch(() => null);
 }
-

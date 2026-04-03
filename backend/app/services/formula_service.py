@@ -1,3 +1,5 @@
+import time
+
 import httpx
 
 from app.schemas.formula import FormulaCandidate, PresidentialFormula
@@ -7,8 +9,16 @@ FOTO_BASE = "https://mpesije.jne.gob.pe/apidocs/"
 LOGO_BASE = "https://votoinformado.jne.gob.pe/LogoOp/"
 ESTADOS_EXCLUIDOS = {"IMPROCEDENTE", "RENUNCIA", "FALLECIDO"}
 
+_CACHE_TTL = 300.0  # 5 minutes
+
+_formulas_cache: dict = {"data": None, "ts": 0.0}
+
 
 async def get_formulas() -> list[PresidentialFormula]:
+    now = time.monotonic()
+    if _formulas_cache["data"] is not None and now - _formulas_cache["ts"] < _CACHE_TTL:
+        return _formulas_cache["data"]
+
     payload = {"idProcesoElectoral": 124, "strUbiDepartamento": "", "idTipoEleccion": 1}
 
     async with httpx.AsyncClient(timeout=15.0) as client:
@@ -46,4 +56,32 @@ async def get_formulas() -> list[PresidentialFormula]:
         p["candidatos"].sort(key=lambda x: x.posicion)
         result.append(PresidentialFormula(**p))
 
-    return sorted(result, key=lambda x: x.nombre_partido)
+    result = sorted(result, key=lambda x: x.nombre_partido)
+    _formulas_cache["data"] = result
+    _formulas_cache["ts"] = now
+    return result
+
+
+# DNI → candidate_id index with its own TTL cache
+_dni_cache: dict = {"data": None, "ts": 0.0}
+
+
+def get_dni_index(db) -> dict[str, int]:
+    from sqlalchemy import select
+    from app.models import Candidate
+
+    now = time.monotonic()
+    if _dni_cache["data"] is not None and now - _dni_cache["ts"] < _CACHE_TTL:
+        return _dni_cache["data"]
+
+    candidates = db.scalars(select(Candidate)).all()
+    index: dict[str, int] = {}
+    for c in candidates:
+        meta = c.metadata_json or {}
+        doc = str(meta.get("document_number") or "").strip()
+        if doc:
+            index[doc] = c.id
+
+    _dni_cache["data"] = index
+    _dni_cache["ts"] = now
+    return index

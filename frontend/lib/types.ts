@@ -116,6 +116,7 @@ export type FormulaCandidate = {
   foto_url: string;
   dni: string;
   posicion: number;
+  candidate_id: number | null;
 };
 
 export type PresidentialFormula = {

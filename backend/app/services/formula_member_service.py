@@ -321,21 +321,25 @@ def get_member_detail(db: Session, member_id: int) -> FormulaMemberDetail | None
     return _member_to_detail(member)
 
 
-def get_member_by_name(db: Session, name: str) -> FormulaMemberRead | None:
+def get_member_by_name(db: Session, name: str) -> FormulaMemberDetail | None:
+    from sqlalchemy import func
     normalized = name.upper().strip()
-    all_members = list(db.scalars(select(FormulaMember)).all())
 
-    # 1. Exact match
-    for m in all_members:
-        if m.candidate_name.upper().strip() == normalized:
-            return _member_to_read(m)
+    # 1. SQL exact match — fast, single row lookup
+    member = db.scalars(
+        select(FormulaMember).where(
+            func.upper(func.trim(FormulaMember.candidate_name)) == normalized
+        )
+    ).first()
+    if member:
+        return _member_to_detail(member)
 
-    # 2. All tokens from query appear in db name
+    # 2. Token fallback — only if exact fails (rare: name format differences)
     tokens = normalized.split()
+    all_members = db.scalars(select(FormulaMember)).all()
     for m in all_members:
-        db_name = m.candidate_name.upper().strip()
-        if all(tok in db_name for tok in tokens):
-            return _member_to_read(m)
+        if all(tok in m.candidate_name.upper() for tok in tokens):
+            return _member_to_detail(m)
 
     return None
 

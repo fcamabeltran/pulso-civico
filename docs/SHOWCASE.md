@@ -8,37 +8,25 @@ Este documento define qué material visual conviene subir al repositorio para qu
 docs/
   assets/
     .gitkeep
-    home-overview.png
-    compare-builder.gif
-    compare-results.png
-    assistant-evidence.png
-    candidate-profile.png
-    formulas-grid.png
+    comparar.gif
+    perfil.gif
+    asistente-ia.gif
 ```
 
 ## Asset Order for README
 
-1. `compare-builder.gif`
-   - Muestra selección de dos candidaturas y entrada al comparador.
-2. `assistant-evidence.png`
-   - Debe incluir respuesta, tarjetas de fuente y páginas.
-3. `compare-results.png`
-   - Vista comparativa ya cargada con diferencias por tema.
-4. `candidate-profile.png`
-   - Ficha con foto, resumen y enlaces oficiales.
-5. `formulas-grid.png`
-   - Exploración de fórmulas presidenciales.
-6. `home-overview.png`
-   - Home donde se ve el mapa del producto.
+1. `comparar.gif`
+   - Muestra la experiencia del comparador y la lectura guiada.
+2. `perfil.gif`
+   - Muestra la ficha de candidatura y la profundidad del dato público.
+3. `asistente-ia.gif`
+   - Debe incluir respuesta, evidencia y páginas o trazabilidad visible.
 
 ## What Each Asset Should Prove
 
-- `home-overview.png`: criterio de producto y jerarquía de información
-- `compare-builder.gif`: UX interactiva y orientación a tarea
-- `compare-results.png`: diseño editorial y comparación guiada
-- `assistant-evidence.png`: IA con trazabilidad real
-- `candidate-profile.png`: calidad de integración de datos públicos
-- `formulas-grid.png`: cobertura de exploración y visualización
+- `comparar.gif`: UX interactiva y comparación guiada
+- `perfil.gif`: calidad de integración de datos públicos y claridad editorial
+- `asistente-ia.gif`: IA con trazabilidad real
 
 ## Capture Guidelines
 
@@ -51,13 +39,13 @@ docs/
 ## Suggested README Embeds
 
 ```md
-![Pulso Cívico Home](docs/assets/home-overview.png)
-![Comparador de candidaturas](docs/assets/compare-results.png)
-![Asistente IA con evidencia](docs/assets/assistant-evidence.png)
+![Comparador guiado](docs/assets/comparar.gif)
+![Perfil de candidatura](docs/assets/perfil.gif)
+![Asistente IA con evidencia](docs/assets/asistente-ia.gif)
 ```
 
 ## Optional Extras
 
-- GIF corto de zoom en imágenes y fichas.
-- GIF de pregunta comparativa en el asistente.
+- Screenshot de fórmulas presidenciales cuando esa UI esté más estable.
 - Screenshot de hoja de vida estructurada cuando esa UI esté pública.
+- GIF corto adicional con una comparación o consulta puntual.

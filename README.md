@@ -22,19 +22,15 @@ Pulso Cívico toma documentos públicos complejos y los convierte en una experie
 
 ### Comparador guiado
 
-![Pulso Cívico Showcase](./docs/assets/pulso-civico-showcase.gif)
+![Comparador guiado](./docs/assets/comparar.gif)
 
-### Exploración de candidaturas
+### Perfil de candidatura
 
-![Exploración de candidaturas](./docs/assets/candidate-flow.gif)
+![Perfil de candidatura](./docs/assets/perfil.gif)
 
 ### Asistente IA con evidencia
 
-![Asistente IA con evidencia](./docs/assets/assistant-evidence.png)
-
-### Vista de fórmulas presidenciales
-
-![Fórmulas presidenciales](./docs/assets/formulas-grid.png)
+![Asistente IA con evidencia](./docs/assets/asistente-ia.gif)
 
 ## Why This Project Matters
 
@@ -233,10 +229,8 @@ La visión detallada está en [PLAN_DESARROLLO.md](./PLAN_DESARROLLO.md).
 Para que el repositorio funcione como portfolio técnico, conviene subir en este orden:
 
 1. GIF del comparador guiado.
-2. Screenshot del asistente IA con páginas y evidencia.
-3. Screenshot de ficha de candidatura.
-4. Screenshot de fórmulas presidenciales.
-5. Screenshot del módulo de comparación con fuentes.
+2. GIF del perfil de candidatura.
+3. GIF del asistente IA con evidencia.
 
 Checklist completo: [docs/SHOWCASE.md](./docs/SHOWCASE.md)
 

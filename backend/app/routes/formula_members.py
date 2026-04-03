@@ -23,8 +23,8 @@ def list_formula_profiles_endpoint(db: Session = Depends(get_db)) -> list[Formul
     return list_formula_profiles(db)
 
 
-@router.get("/formula-members/by-name/{name}", response_model=FormulaMemberRead)
-def get_member_by_name_endpoint(name: str, db: Session = Depends(get_db)) -> FormulaMemberRead:
+@router.get("/formula-members/by-name/{name}", response_model=FormulaMemberDetail)
+def get_member_by_name_endpoint(name: str, db: Session = Depends(get_db)) -> FormulaMemberDetail:
     member = get_member_by_name(db, name)
     if not member:
         raise HTTPException(status_code=404, detail="No se encontró un miembro con ese nombre.")

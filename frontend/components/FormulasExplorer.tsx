@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useMemo } from "react";
 import { PresidentialFormula, FormulaCandidate } from "@/lib/types";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -17,12 +18,15 @@ function toTitleCase(s: string) {
 function CandidateRow({ c }: { c: FormulaCandidate }) {
   const [zoomOpen, setZoomOpen] = useState(false);
   const role = ROLES[c.id_cargo] ?? ROLES[1];
+  const isPresident = c.id_cargo === 1;
+  const name = toTitleCase(c.nombre);
+
   return (
     <>
-      <div className="formula-cand-row" style={{ borderLeftColor: role.color }}>
+      <div className={`formula-cand-row${isPresident ? " formula-cand-row--president" : ""}`} style={{ borderLeftColor: role.color }}>
         <div className="formula-photo-wrap">
           <button
-            aria-label={`Ampliar foto de ${toTitleCase(c.nombre)}`}
+            aria-label={`Ampliar foto de ${name}`}
             className="image-zoom-trigger formula-photo-button"
             onClick={() => setZoomOpen(true)}
             type="button"
@@ -43,13 +47,37 @@ function CandidateRow({ c }: { c: FormulaCandidate }) {
             {c.posicion}
           </span>
         </div>
+
         <div className="formula-cand-info">
           <div className="formula-role" style={{ color: role.color }}>{role.label}</div>
-          <div className="formula-name">{toTitleCase(c.nombre)}</div>
+
+          {c.candidate_id ? (
+            <Link className="formula-name formula-name--link" href={`/candidates/${c.candidate_id}`}>
+              {name}
+            </Link>
+          ) : (
+            <div className="formula-name">{name}</div>
+          )}
+
           <div className="formula-dni">DNI {c.dni}</div>
+
+          {c.candidate_id && isPresident && (
+            <Link className="formula-profile-btn" href={`/candidates/${c.candidate_id}?tab=perfil`}>
+              Ver perfil completo
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13" aria-hidden="true">
+                <path d="m6 3 5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          )}
+
+          {c.candidate_id && !isPresident && (
+            <Link className="formula-profile-link" href={`/candidates/${c.candidate_id}?tab=perfil`}>
+              Ver perfil →
+            </Link>
+          )}
         </div>
       </div>
-      {zoomOpen ? <ImageLightbox alt={toTitleCase(c.nombre)} onClose={() => setZoomOpen(false)} src={c.foto_url} /> : null}
+      {zoomOpen ? <ImageLightbox alt={name} onClose={() => setZoomOpen(false)} src={c.foto_url} /> : null}
     </>
   );
 }
