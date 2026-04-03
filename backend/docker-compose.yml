@@ -1,0 +1,30 @@
+services:
+  api:
+    build:
+      context: .
+    container_name: pulso-civico-api
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./app:/app/app
+      - ./data:/app/data
+      - ./chroma:/app/chroma
+
+  db:
+    image: postgres:16
+    container_name: pulso-civico-db
+    environment:
+      POSTGRES_USER: pulso
+      POSTGRES_PASSWORD: pulso
+      POSTGRES_DB: pulso_civico
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

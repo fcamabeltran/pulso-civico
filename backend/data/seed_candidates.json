@@ -1,0 +1,77 @@
+{
+  "candidates": [
+    {
+      "name": "Ana Torres",
+      "party": "Movimiento Regional Norte",
+      "region": "Piura",
+      "office": "Gobernacion Regional",
+      "biography": "Economista con experiencia en gestion publica regional.",
+      "metadata": {
+        "election_year": 2026
+      },
+      "proposals": [
+        {
+          "axis": "Agua",
+          "title": "Cobertura de agua rural",
+          "content": "Propone ampliar la cobertura de agua potable rural en Piura con prioridad en distritos con brecha historica. El plan incluye diagnostico de redes, plantas compactas y seguimiento trimestral del avance.",
+          "source_name": "JNE",
+          "source_url": "https://example.org/jne/ana-torres-plan"
+        },
+        {
+          "axis": "Salud",
+          "title": "Centros de atencion primaria",
+          "content": "Plantea reforzar los centros de atencion primaria con equipamiento, historias clinicas digitales y brigadas moviles para zonas alejadas.",
+          "source_name": "INFOGOB",
+          "source_url": "https://example.org/infogob/ana-torres-salud"
+        }
+      ],
+      "promises": [
+        {
+          "title": "Construccion de 20 pozos",
+          "description": "Anuncio de construccion de 20 pozos tubulares en zonas de emergencia hidrica.",
+          "status": "pendiente",
+          "source_name": "Plan de Gobierno",
+          "source_url": "https://example.org/jne/ana-torres-plan",
+          "evidence_note": "Sin reporte oficial de ejecucion a la fecha."
+        }
+      ]
+    },
+    {
+      "name": "Luis Herrera",
+      "party": "Frente Ciudadano Costero",
+      "region": "Piura",
+      "office": "Gobernacion Regional",
+      "biography": "Abogado y ex consejero regional.",
+      "metadata": {
+        "election_year": 2026
+      },
+      "proposals": [
+        {
+          "axis": "Agua",
+          "title": "Desalinizacion y reservorios",
+          "content": "El plan prioriza reservorios provinciales y estudios para una planta de desalinizacion modular. Incluye coordinacion con municipalidades y financiamiento escalonado.",
+          "source_name": "JNE",
+          "source_url": "https://example.org/jne/luis-herrera-plan"
+        },
+        {
+          "axis": "Economia",
+          "title": "Compras locales y agroexportacion",
+          "content": "La propuesta economica contempla compras estatales a productores locales, asistencia tecnica y un fondo para mejorar cadenas de frio en agroexportacion.",
+          "source_name": "INFOGOB",
+          "source_url": "https://example.org/infogob/luis-herrera-economia"
+        }
+      ],
+      "promises": [
+        {
+          "title": "Fondo regional para cadenas de frio",
+          "description": "Creacion de un fondo orientado a pequenos productores agroexportadores.",
+          "status": "parcial",
+          "source_name": "Reporte Oficial",
+          "source_url": "https://example.org/reporte/luis-herrera-fondo",
+          "evidence_note": "Existe acuerdo de consejo, pero no se registra ejecucion total."
+        }
+      ]
+    }
+  ]
+}
+

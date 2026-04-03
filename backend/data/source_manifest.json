@@ -1,0 +1,20 @@
+{
+  "plan_pages": [
+    {
+      "url": "https://plataformahistorico.jne.gob.pe/OrganizacionesPoliticas/PlanesGobiernoTrabajo",
+      "download_plan_documents": false
+    }
+  ],
+  "candidate_pages": [
+    {
+      "url": "https://plataformahistorico.jne.gob.pe/ListaDeCandidatos/DetalleHDV"
+    }
+  ],
+  "uploaded_documents": [
+    {
+      "path": "/app/data/uploads/plan-ejemplo.pdf",
+      "title": "Plan de gobierno cargado manualmente",
+      "source_name": "Documento cargado"
+    }
+  ]
+}
