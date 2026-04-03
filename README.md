@@ -22,7 +22,11 @@ Pulso Cívico toma documentos públicos complejos y los convierte en una experie
 
 ### Comparador guiado
 
-![Comparador guiado](./docs/assets/compare-builder.gif)
+![Pulso Cívico Showcase](./docs/assets/pulso-civico-showcase.gif)
+
+### Exploración de candidaturas
+
+![Exploración de candidaturas](./docs/assets/candidate-flow.gif)
 
 ### Asistente IA con evidencia
 
